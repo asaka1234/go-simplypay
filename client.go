@@ -1,19 +1,19 @@
-package go_starpago
+package go_simplypay
 
 import (
-	"github.com/asaka1234/go-starpago/utils"
+	"github.com/asaka1234/go-simplypay/utils"
 	"github.com/go-resty/resty/v2"
 )
 
 type Client struct {
-	Params *StarPagoInitParams
+	Params *SimplyPayInitParams
 
 	ryClient  *resty.Client
 	debugMode bool
 	logger    utils.Logger
 }
 
-func NewClient(logger utils.Logger, params *StarPagoInitParams) *Client {
+func NewClient(logger utils.Logger, params *SimplyPayInitParams) *Client {
 	return &Client{
 		Params: params,
 

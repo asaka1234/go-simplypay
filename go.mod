@@ -1,4 +1,4 @@
-module github.com/asaka1234/go-starpago
+module github.com/asaka1234/go-simplypay
 
 go 1.24.2
 

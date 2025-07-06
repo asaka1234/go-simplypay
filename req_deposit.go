@@ -1,13 +1,13 @@
-package go_starpago
+package go_simplypay
 
 import (
 	"crypto/tls"
-	"github.com/asaka1234/go-starpago/utils"
+	"github.com/asaka1234/go-simplypay/utils"
 	"github.com/mitchellh/mapstructure"
 )
 
 // 代收
-func (cli *Client) Deposit(req StarPagoDepositReq) (*StarPagoDepositResponse, error) {
+func (cli *Client) Deposit(req SimplyPayDepositReq) (*SimplyPayDepositResponse, error) {
 
 	rawURL := cli.Params.DepositUrl
 
@@ -15,13 +15,14 @@ func (cli *Client) Deposit(req StarPagoDepositReq) (*StarPagoDepositResponse, er
 	mapstructure.Decode(req, &params)
 	params["appId"] = cli.Params.MerchantId
 	params["notifyUrl"] = cli.Params.DepositBackUrl
+	params["currency"] = "INR"
 
 	//签名
 	signStr := utils.Sign(params, cli.Params.AccessKey)
 	params["sign"] = signStr
 
 	//返回值会放到这里
-	var result StarPagoDepositResponse
+	var result SimplyPayDepositResponse
 
 	_, err := cli.ryClient.SetTLSClientConfig(&tls.Config{InsecureSkipVerify: true}).
 		SetCloseConnection(true).

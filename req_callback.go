@@ -1,13 +1,13 @@
-package go_starpago
+package go_simplypay
 
 import (
 	"errors"
-	"github.com/asaka1234/go-starpago/utils"
+	"github.com/asaka1234/go-simplypay/utils"
 	"github.com/mitchellh/mapstructure"
 )
 
 // 充值的回调处理(传入一个处理函数)
-func (cli *Client) DepositCallback(req StarPagoDepositBackReq, processor func(StarPagoDepositBackReq) error) error {
+func (cli *Client) DepositCallback(req SimplyPayDepositBackReq, processor func(SimplyPayDepositBackReq) error) error {
 	//验证签名
 	var params map[string]interface{}
 	mapstructure.Decode(req, &params)
@@ -25,7 +25,7 @@ func (cli *Client) DepositCallback(req StarPagoDepositBackReq, processor func(St
 //==========================================
 
 // 充值的回调处理(传入一个处理函数)
-func (cli *Client) WithdrawCallBack(req StarPagoWithdrawBackReq, processor func(StarPagoWithdrawBackReq) error) error {
+func (cli *Client) WithdrawCallBack(req SimplyPayWithdrawBackReq, processor func(SimplyPayWithdrawBackReq) error) error {
 	//验证签名
 	var params map[string]interface{}
 	mapstructure.Decode(req, &params)
