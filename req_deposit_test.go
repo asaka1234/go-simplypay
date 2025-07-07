@@ -40,7 +40,7 @@ func TestDeposit(t *testing.T) {
 func GenDepositRequestDemo() SimplyPayDepositReq {
 	return SimplyPayDepositReq{
 		MerOrderNo: "323231224", //商户id
-		Amount:     "100000",
+		Amount:     "200",       //100->50000
 		Extra: SimplyPayINRDepositReqExtra{
 			Name:   "john", //这个不需要其他参数
 			Email:  "demo@gmail.com",

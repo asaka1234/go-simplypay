@@ -1,7 +1,7 @@
 package go_simplypay
 
 type SimplyPayInitParams struct {
-	MerchantId int64  `json:"merchantId" mapstructure:"merchantId" config:"merchantId"  yaml:"merchantId"` // merchantId
+	MerchantId string `json:"merchantId" mapstructure:"merchantId" config:"merchantId"  yaml:"merchantId"` // merchantId
 	AccessKey  string `json:"accessKey" mapstructure:"accessKey" config:"accessKey"  yaml:"accessKey"`     //接入秘钥
 	Ip         string `json:"ip" mapstructure:"ip" config:"ip"  yaml:"ip"`                                 //回调时,对方的ip白名单
 
@@ -21,7 +21,7 @@ type CommonResp struct {
 
 type SimplyPayDepositReq struct {
 	Amount     string                      `json:"amount" mapstructure:"amount"`           // 金额
-	Attach     *string                     `json:"attach,omitempty" mapstructure:"attach"` // 附加信息, 商户附加信息，原样返回
+	Attach     string                      `json:"attach,omitempty" mapstructure:"attach"` // 附加信息, 商户附加信息，原样返回
 	MerOrderNo string                      `json:"merOrderNo" mapstructure:"merOrderNo"`   // 商户订单号, 商户订单号
 	Extra      SimplyPayINRDepositReqExtra `json:"extra" mapstructure:"extra"`
 	// 以下sdk帮搞
@@ -32,9 +32,9 @@ type SimplyPayDepositReq struct {
 }
 
 type SimplyPayINRDepositReqExtra struct {
-	Name   string `json:"name"`
-	Email  string `json:"email"`
-	Mobile string `json:"mobile"`
+	Name   string `json:"name" mapstructure:"name"`
+	Email  string `json:"email" mapstructure:"email"`
+	Mobile string `json:"mobile" mapstructure:"mobile"`
 }
 
 // 返回数据
@@ -85,7 +85,7 @@ type SimplyPayDepositBackReq struct {
 
 type SimplyPayWithdrawReq struct {
 	Amount     string                       `json:"amount" mapstructure:"amount"`         // 金额
-	Attach     *string                      `json:"attach" mapstructure:"attach"`         // 附加信息, 商户附加信息，原样返回
+	Attach     string                       `json:"attach" mapstructure:"attach"`         // 附加信息, 商户附加信息，原样返回
 	Extra      SimplyPayINRWithdrawReqExtra `json:"extra" mapstructure:"extra"`           // 扩展信息 (代付给谁)
 	MerOrderNo string                       `json:"merOrderNo" mapstructure:"merOrderNo"` // 商户订单号, 商户订单号
 	//以下sdk设置
@@ -96,12 +96,12 @@ type SimplyPayWithdrawReq struct {
 }
 
 type SimplyPayINRWithdrawReqExtra struct {
-	PayoutType string `json:"payoutType"` //fixed, IFSC
-	Ifsc       string `json:"ifsc"`       //ifsc号码
-	Account    string `json:"account"`    //银行收款账号
-	Name       string `json:"name"`       //客户名称
-	Email      string `json:"email"`      //客户邮箱
-	Mobile     string `json:"mobile"`     //客户手机
+	PayoutType string `json:"payoutType" mapstructure:"payoutType"` //fixed, IFSC
+	Ifsc       string `json:"ifsc" mapstructure:"ifsc"`             //ifsc号码
+	Account    string `json:"account" mapstructure:"account"`       //银行收款账号
+	Name       string `json:"name" mapstructure:"name"`             //客户名称
+	Email      string `json:"email" mapstructure:"email"`           //客户邮箱
+	Mobile     string `json:"mobile" mapstructure:"mobile"`         //客户手机
 }
 
 // 返回数据

@@ -77,7 +77,7 @@ func Sign(params map[string]any, appSecret string) string {
 	if appSecret != "" {
 		paramsString += "&key=" + appSecret
 	}
-	// fmt.Println("sign: =====> ", paramsString)
+	fmt.Println("sign: =====> ", paramsString)
 
 	// 5. 计算签名
 	h := sha256.New()

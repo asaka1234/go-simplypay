@@ -23,7 +23,7 @@ func TestPKWithdraw(t *testing.T) {
 func GenWithdrawRequestDemo() SimplyPayWithdrawReq {
 	return SimplyPayWithdrawReq{
 		MerOrderNo: "111",
-		Amount:     "1000000",
+		Amount:     "200", //100-50000
 		Extra: SimplyPayINRWithdrawReqExtra{
 			PayoutType: "IFSC",
 			Ifsc:       "129171971",
