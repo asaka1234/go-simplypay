@@ -36,7 +36,7 @@ func (cli *Client) Withdraw(req SimplyPayWithdrawReq) (*SimplyPayWithdrawRespons
 		Post(rawURL)
 
 	restLog, _ := jsoniter.ConfigCompatibleWithStandardLibrary.Marshal(utils.GetRestyLog(resp2))
-	cli.logger.Infof("PSPResty#simplypay#withdraw->%+v", string(restLog))
+	cli.logger.Infof("PSPResty#simplypay#withdraw->%s", string(restLog))
 
 	if err != nil {
 		return nil, err

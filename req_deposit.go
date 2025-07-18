@@ -36,7 +36,7 @@ func (cli *Client) Deposit(req SimplyPayDepositReq) (*SimplyPayDepositResponse, 
 		Post(rawURL)
 
 	restLog, _ := jsoniter.ConfigCompatibleWithStandardLibrary.Marshal(utils.GetRestyLog(resp2))
-	cli.logger.Infof("PSPResty#simplypay#deposit->%+v", string(restLog))
+	cli.logger.Infof("PSPResty#simplypay#deposit->%s", string(restLog))
 
 	if err != nil {
 		return nil, err
