@@ -2,7 +2,9 @@ package go_simplypay
 
 import (
 	"crypto/tls"
+	"fmt"
 	"github.com/asaka1234/go-simplypay/utils"
+	jsoniter "github.com/json-iterator/go"
 	"github.com/mitchellh/mapstructure"
 )
 
@@ -24,7 +26,7 @@ func (cli *Client) Deposit(req SimplyPayDepositReq) (*SimplyPayDepositResponse, 
 	//返回值会放到这里
 	var result SimplyPayDepositResponse
 
-	_, err := cli.ryClient.SetTLSClientConfig(&tls.Config{InsecureSkipVerify: true}).
+	resp2, err := cli.ryClient.SetTLSClientConfig(&tls.Config{InsecureSkipVerify: true}).
 		SetCloseConnection(true).
 		R().
 		SetHeaders(getHeaders()).
@@ -33,8 +35,21 @@ func (cli *Client) Deposit(req SimplyPayDepositReq) (*SimplyPayDepositResponse, 
 		SetResult(&result).
 		Post(rawURL)
 
+	restLog, _ := jsoniter.ConfigCompatibleWithStandardLibrary.Marshal(utils.GetRestyLog(resp2))
+	cli.logger.Infof("PSPResty#simplypay#deposit->%+v", string(restLog))
+
 	if err != nil {
 		return nil, err
+	}
+
+	if resp2.StatusCode() != 200 {
+		//反序列化错误会在此捕捉
+		return nil, fmt.Errorf("status code: %d", resp2.StatusCode())
+	}
+
+	if resp2.Error() != nil {
+		//反序列化错误会在此捕捉
+		return nil, fmt.Errorf("%v, body:%s", resp2.Error(), resp2.Body())
 	}
 
 	return &result, nil
